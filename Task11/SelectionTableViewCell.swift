@@ -7,18 +7,35 @@
 
 import UIKit
 
-class SelectionTableViewCell: UITableViewCell {
+protocol RegisterableCell {
+    static var nibName: String { get }
+    static var reuseIdentifier: String { get }
+}
 
+extension UITableView {
+    func register<Cell: UITableViewCell>(_ cell: Cell.Type) where Cell: RegisterableCell {
+        register(
+            UINib(nibName: cell.nibName, bundle: nil),
+            forCellReuseIdentifier: cell.reuseIdentifier
+        )
+    }
+}
+
+class SelectionTableViewCell: UITableViewCell, RegisterableCell {
     @IBOutlet private weak var prefectureNameLabel: UILabel!
 
-    static var toString: String {
+    private static var className: String {
         return String(describing: self)
     }
-    static let id = SelectionTableViewCell.toString
 
-    static func nib() -> UINib {
-        return UINib(nibName: SelectionTableViewCell.id, bundle: nil)
+    static var nibName: String {
+        className
     }
+
+    static var reuseIdentifier: String {
+        className
+    }
+
     func configure(prefectureName: String) {
         prefectureNameLabel.text = prefectureName
     }

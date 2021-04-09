@@ -16,4 +16,3 @@ class ViewController: UIViewController {
         selectedPrefectureLabel.text = selectionVC.selectedPrefecture
     }
 }
-

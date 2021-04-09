@@ -11,7 +11,7 @@ class SelectionTablewViewController: UIViewController {
     
     @IBOutlet private weak var selectionTableView: UITableView!
 
-    let prefectures = ["北海道", "青森県", "岩手県", "宮城県", "秋田県",
+    private let prefectures = ["北海道", "青森県", "岩手県", "宮城県", "秋田県",
                        "山形県", "福島県", "茨城県", "栃木県", "群馬県",
                        "埼玉県", "千葉県", "東京都", "神奈川県","新潟県",
                        "富山県", "石川県", "福井県", "山梨県", "長野県",
@@ -27,9 +27,8 @@ class SelectionTablewViewController: UIViewController {
         super.viewDidLoad()
         selectionTableView.delegate = self
         selectionTableView.dataSource = self
-        selectionTableView.register(SelectionTableViewCell.nib(), forCellReuseIdentifier: SelectionTableViewCell.id)
+        selectionTableView.register(SelectionTableViewCell.self)
     }
-
 }
 
 extension SelectionTablewViewController: UITableViewDelegate {
@@ -46,10 +45,8 @@ extension SelectionTablewViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell  = tableView.dequeueReusableCell(withIdentifier: SelectionTableViewCell.id, for: indexPath) as! SelectionTableViewCell
+        let cell  = tableView.dequeueReusableCell(withIdentifier: SelectionTableViewCell.reuseIdentifier, for: indexPath) as! SelectionTableViewCell
         cell.configure(prefectureName: prefectures[indexPath.row])
         return cell
     }
-
-
 }
