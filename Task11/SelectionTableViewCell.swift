@@ -10,10 +10,10 @@ import UIKit
 class SelectionTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var prefectureNameLabel: UILabel!
-
     static var toString: String {
         return String(describing: self)
     }
+
     static let id = SelectionTableViewCell.toString
 
     static func nib() -> UINib {
