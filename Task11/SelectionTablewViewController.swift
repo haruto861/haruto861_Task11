@@ -27,7 +27,7 @@ class SelectionTablewViewController: UIViewController {
         super.viewDidLoad()
         selectionTableView.delegate = self
         selectionTableView.dataSource = self
-        selectionTableView.register(SelectionTableViewCell.nib(), forCellReuseIdentifier: SelectionTableViewCell.id)
+        selectionTableView.register(_cell: SelectionTableViewCell.self)
     }
 
 }
@@ -46,7 +46,7 @@ extension SelectionTablewViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell  = tableView.dequeueReusableCell(withIdentifier: SelectionTableViewCell.id, for: indexPath) as! SelectionTableViewCell
+        let cell  = tableView.dequeueReusableCell(withIdentifier: SelectionTableViewCell.reuseIdetifier, for: indexPath) as! SelectionTableViewCell
         cell.configure(prefectureName: prefectures[indexPath.row])
         return cell
     }
